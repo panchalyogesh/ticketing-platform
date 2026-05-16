@@ -1,0 +1,31 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "API_BASE_URL",
+    "PORT",
+    "NODE_ENV",
+    "ADMIN_API_KEY",
+    "PRICE_TIME_WEIGHT",
+    "PRICE_DEMAND_WEIGHT",
+    "PRICE_INVENTORY_WEIGHT",
+    "RUN_DB_TESTS"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}
