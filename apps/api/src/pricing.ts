@@ -1,4 +1,4 @@
-import type { Event } from "@repo/database/src/schema";
+import type { Event } from "@repo/database";
 
 export type PricingWeights = {
   timeWeight: number;

@@ -4,6 +4,15 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT_DIR"
 
+if [ -f "$ROOT_DIR/.env" ]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$ROOT_DIR/.env"
+  set +a
+fi
+
+export DATABASE_URL="${DATABASE_URL:-postgresql://postgres:postgres@localhost:5432/ticketing}"
+
 if ! command -v docker >/dev/null 2>&1; then
   echo "docker is required"
   exit 1

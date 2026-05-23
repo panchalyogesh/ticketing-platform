@@ -34,6 +34,16 @@ services:
       PRICE_INVENTORY_WEIGHT: 1
     ports:
       - "3001:3001"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "node -e \"require('http').get('http://127.0.0.1:3001/health',r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))\"",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
 
   web:
     build:
@@ -41,7 +51,8 @@ services:
       dockerfile: Dockerfile.web
     container_name: ticketing-web
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     environment:
       API_BASE_URL: http://api:3001
     ports:

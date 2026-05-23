@@ -18,7 +18,8 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "smoke": "bash ./scripts/smoke.sh"
+    "smoke": "bash ./scripts/smoke.sh",
+    "test:all": "bash ./scripts/test-all.sh"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

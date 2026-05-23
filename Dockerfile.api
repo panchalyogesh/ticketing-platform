@@ -12,7 +12,7 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-RUN pnpm --filter api build
+RUN pnpm --filter @repo/database build && pnpm --filter api build
 
 EXPOSE 3001
 CMD ["sh", "-c", "until pnpm --filter @repo/database db:push; do echo 'waiting for db'; sleep 2; done && pnpm --filter @repo/database db:seed && pnpm --filter api start"]

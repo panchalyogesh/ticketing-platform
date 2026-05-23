@@ -1,9 +1,13 @@
-import "dotenv/config";
+import { config as loadEnv } from "dotenv";
+import { resolve } from "node:path";
 
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
 import * as schema from "./schema";
+
+loadEnv({ path: resolve(__dirname, "../../../.env") });
+loadEnv();
 
 const databaseUrl = process.env.DATABASE_URL;
 
@@ -19,3 +23,4 @@ const sql = postgres(databaseUrl, {
 
 export const db = drizzle(sql, { schema });
 export { sql, schema };
+export type { Event, Booking } from "./schema";
